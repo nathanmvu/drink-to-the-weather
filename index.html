@@ -1,0 +1,79 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drink Your Feelings</title>
+    <link rel='stylesheet' href='style.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+
+  </head>
+  <body style=" background-size: cover; background-image: url('Images/background.png')"> 
+    <h1 class='text-center'>Drink Your Feelings</h1>
+
+    <!-- form -->
+    <div class="row">
+      <div class="columns small-3">
+        <div class="translucent-form-overlay">
+          <form>
+            <h3>Search your city:</h3>
+            <div class="row columns">
+              <label>Location
+                <input id="locationInput" type="text" name="location" placeholder="Any"required>
+              </label>
+            </div>
+            <button id="searchButton" type="button" class="primary button expanded search-button">
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="columns small-9">
+        <div class='row'>
+          <div class='columns'>
+            <img class="work-feature-block-image" src="https://placehold.it/300x300"/>
+          </div>
+          <div class='columns'>
+            <h2 class="work-feature-block-header">Ingredients:</h2>
+            <ul id="ingredientList">
+              <li>Ingredient 1</li>
+              <li>Ingredient 2</li>
+              <li>Ingredient 3</li>
+              <li>Ingredient 4</li>
+            </ul>
+          </div>
+          <div class='columns'>
+            <h2 class="work-feature-block-header">Instructions:</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- second container -for drinks to be put into -->
+    <!-- <div class="work-feature-block row">
+      <div class="columns medium-7">
+        <img class="work-feature-block-image" src="https://placehold.it/600x400"/>
+      </div>
+      <div class="columns medium-5">
+        <h2 class="work-feature-block-header">Project Description</h2>
+        <p></p>
+        <h2></h2>
+        <ul>
+          <li>Item 1</li>
+
+        </ul>
+      </div>
+    </div> -->
+    
+  <script src="dist/bouncer.polyfills.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="./script.js"></script>
+  <script src="js/vendor/jquery.js"></script>
+  <script src="js/vendor/what-input.js"></script>
+  <script src="js/vendor/foundation.min.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
+
+  </body>
+</html>

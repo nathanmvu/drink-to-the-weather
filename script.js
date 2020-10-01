@@ -52,6 +52,10 @@ $(document).ready(function () {
         $("#ingredients").empty();
         $("#instructions").empty();
         $("#currentWeather").empty();
+        $("#img1").empty();
+        $("#img2").empty();
+        $("#img3").empty();
+        $("#img4").empty();
     });
 
     $("#go").on("click", function (event) {
@@ -59,6 +63,10 @@ $(document).ready(function () {
         $("#ingredients").empty();
         $("#instructions").empty();
         $("#currentWeather").empty();
+        $("#img1").empty();
+        $("#img2").empty();
+        $("#img3").empty();
+        $("#img4").empty();
         let feeling = document.getElementsByName('feelings');
         for (let i = 0, length = feeling.length; i < length; i++) {
             if (feeling[i].checked) {
@@ -128,7 +136,7 @@ $(document).ready(function () {
         }
     }
 
-    let recArray = [];
+
     //drinks api
     function getDrinks(drinkArray) {
         var randomCocktailIndex = Math.floor(Math.random() * (drinkArray.length));
@@ -194,6 +202,7 @@ $(document).ready(function () {
 
             // Getting drinks to recommend
             console.log(drinkArray);
+            let recArray = [];
             const rec1 = document.getElementById('namerec1');
             const rec2 = document.getElementById('namerec2');
             const rec3 = document.getElementById('namerec3');
@@ -243,11 +252,11 @@ $(document).ready(function () {
                 var Img3 =  $("<img>").attr("src",  imageURL);
                 $("#img3").append(Img3);
             }
-            else{
+            else if(x===3){
                 var Img4 =  $("<img>").attr("src",  imageURL);
                 $("#img4").append(Img4);
             }
-
+            
         });
     } 
 });

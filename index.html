@@ -10,31 +10,120 @@
 
   </head>
   <body style=" background-size: cover; background-image: url('Images/background.png')"> 
-    <h1 class='text-center'>Drink Your Feelings</h1>
 
-    <!-- form -->
     <div class="row">
-      <div class="columns small-3">
         <div class="translucent-form-overlay">
           <form>
-            <h3>Search your city:</h3>
+            <h3>Search for Properties</h3>
             <div class="row columns">
-              <label>Location
-                <input id="locationInput" type="text" name="location" placeholder="Any"required>
+              <label>Keyword
+                <input type="text" name="keyword" placeholder="Any">
               </label>
             </div>
+            <div class="row columns">
+              <label>Property Status
+                <select name="status" type="text">
+                  <option>Any</option>
+                  <option value="rent">Rent</option>
+                  <option value="buy">Buy</option>
+                </select>
+              </label>
+            </div>
+            <div class="row columns">
+              <label>Property Type
+                <select name="status" type="text">
+                  <option>Any</option>
+                  <option value="office">Office</option>
+                  <option value="building">Building</option>
+                </select>
+              </label>
+            </div>
+            <div class="row columns">
+              <label>Location
+                <input type="text" name="location" placeholder="Any">
+              </label>
+            </div>
+            <div class="row">
+              <label class="columns small-12">Price</label>
+              <div class="columns small-6">
+                <input type="number" min="0" name="min" placeholder="Min">
+              </div>
+              <div class="columns small-6">
+                <input type="number" min="0" name="max" placeholder="Max">
+              </div>
+            </div>
+            <button type="button" class="primary button expanded search-button">
+              Search
+            </button>
+        </form>
+        </div>
+      </div>
+
+    <!-- <div class="holy-grail-grid">
+      <div class="holy-grail-header">
+        <h2 class='text-center'>Drink Your Feelings</h2>
+      </div>
+    
+      <div class="holy-grail-left">
+        <div class='translucent-form-overlay'>
+          <form>
+            <h3>Search your city:</h3>
+            <label for="textminmax">Enter Your Location
+              <input id="locationInput" minlength="3" type="text" name="location" data-bouncer-message="Please enter a city name" placeholder="City Name" name="textminmax" id="textminmax" required>
+            </label>
             <button id="searchButton" type="button" class="primary button expanded search-button">
               Search
             </button>
           </form>
         </div>
       </div>
+    
+      <div class="holy-grail-middle">
+        <div class="middle-top-1">
+          <h3>Drink 1</h3>
+          <img class="work-feature-block-image" src="https://placehold.it/600x400"/>
+        </div>
+        <div class="middle-top-2">
+          <h3>Ingredients:</h3>
+          <p>1</p>
+          <p>2</p>
+          <p>3</p>
+          <p>4</p>
+        </div>
+        <div class="middle-top-3">
+          <h3>Instructions:</h3>
+          <p>1</p>
+          <p>2</p>
+          <p>3</p>
+          <p>4</p>
+        </div>
+      </div>
+    
+      <div class="holy-grail-footer">
+        <h3>Footer</h3>
+      </div>
+    
+    </div> -->
+
+    <h1 class="text-center">Drink Your Feelings</h1>
+    <div class="row">
+      <div class="columns small-3">
+        <form  class="validate-me" id="validate-me" data-validate>
+          <h3>Search your city:</h3>
+          <label for="textminmax">Enter Your Location
+            <input id="locationInput" minlength="3" type="text" name="location" data-bouncer-message="Please enter a city name" placeholder="City Name" name="textminmax" id="textminmax" required>
+          </label>
+          <button id="searchButton" type="button" class="primary button expanded search-button">
+            Search
+          </button>
+        </form>
+      </div>
       <div class="columns small-9">
         <div class='row'>
-          <div class='columns'>
+          <div class='columns small-4'>
             <img class="work-feature-block-image" src="https://placehold.it/300x300"/>
           </div>
-          <div class='columns'>
+          <div class='columns small-4'>
             <h2 class="work-feature-block-header">Ingredients:</h2>
             <ul id="ingredientList">
               <li>Ingredient 1</li>
@@ -43,37 +132,18 @@
               <li>Ingredient 4</li>
             </ul>
           </div>
-          <div class='columns'>
+          <div class='columns small-4'>
             <h2 class="work-feature-block-header">Instructions:</h2>
           </div>
         </div>
       </div>
     </div>
-    <!-- second container -for drinks to be put into -->
-    <!-- <div class="work-feature-block row">
-      <div class="columns medium-7">
-        <img class="work-feature-block-image" src="https://placehold.it/600x400"/>
-      </div>
-      <div class="columns medium-5">
-        <h2 class="work-feature-block-header">Project Description</h2>
-        <p></p>
-        <h2></h2>
-        <ul>
-          <li>Item 1</li>
-
-        </ul>
-      </div>
-    </div> -->
     
-  <script src="dist/bouncer.polyfills.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/cferdinandi/bouncer@1/dist/bouncer.polyfills.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="./script.js"></script>
-  <script src="js/vendor/jquery.js"></script>
-  <script src="js/vendor/what-input.js"></script>
-  <script src="js/vendor/foundation.min.js"></script>
   <script>
-    $(document).foundation();
+    var validate = new Bouncer('form');
   </script>
-
   </body>
 </html>

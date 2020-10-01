@@ -74,7 +74,7 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            $("#currentWeather").text("Current Weather: "+ response.main.temp);
+            $("#currentWeather").html("Current Weather in "+response.name+ " " +response.main.temp +" "+ "&#176F");
             var weather = response.weather[0].main;
             var temp = response.main.temp;
             if (temp < 60) {
@@ -160,11 +160,6 @@ $(document).ready(function () {
             drinkNameEl.innerHTML = drinkName;
 
         //for main img/title
-
-    //     var container2 = $("<div>").addClass("container2");
-    //     $("#outputForm").append(container2);
-    //     var titleOverlay =$("<div>").addClass("translucent-overlay").attr("id","mainimgholder");
-    //     $("#imgContainer").append(titleOverlay);
             var drinkNameText = $("<h5>").text(drinkName);
             $("#mainimgholder").append(drinkNameText);
             var mainImg =  $("<img>").attr("src",  imageURL);
@@ -192,20 +187,18 @@ $(document).ready(function () {
             const instructionsEl = document.getElementById("instructions");
             instructionsEl.innerHTML = howToMake;
 
+            // Getting drinks to recommend
+            console.log(drinkArray);
             let recArray = [];
             for (let i = 0; i < drinkArray.length; i++) {
-                if(drinkArray[i] != drinkName) {
-                    
-                }
+                let randomRecIndex = Math.floor(Math.random() * (drinkArray.length) + 1);
+                console.log(randomRecIndex);
+                if((drinkArray[randomRecIndex] != drinkName)  && (!recArray.includes(drinkArray[randomRecIndex]))){
+                    recArray.push(drinkArray[randomRecIndex]);
+                } 
             }
+            console.log(recArray);
         });
-    }
-
-    function getRecs(drinkArray) {
-        let recArray = [];
-        for(let i = 0; i < drinkArray.length; i++) {
-            let
-        }
     }
  
 });

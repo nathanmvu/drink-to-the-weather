@@ -213,7 +213,7 @@ img {
   -ms-grid-columns: (3fr)[3];
       grid-template-columns: repeat(3, 3fr);
   /* width: 100vw; */
-  height: 50vh;
+  height: 30vh;
 }
 
 @media screen and (max-width: 60em) {

@@ -50,11 +50,15 @@ $(document).ready(function () {
         $("#locationInput").val("");
         $("#mainimgholder").empty();
         $("#ingredients").empty();
+        $("#instructions").empty();
+        $("#currentWeather").empty();
     });
 
     $("#go").on("click", function (event) {
         $("#mainimgholder").empty();
         $("#ingredients").empty();
+        $("#instructions").empty();
+        $("#currentWeather").empty();
         let feeling = document.getElementsByName('feelings');
         for (let i = 0, length = feeling.length; i < length; i++) {
             if (feeling[i].checked) {
@@ -124,6 +128,7 @@ $(document).ready(function () {
         }
     }
 
+    let recArray = [];
     //drinks api
     function getDrinks(drinkArray) {
         var randomCocktailIndex = Math.floor(Math.random() * (drinkArray.length));
@@ -189,16 +194,60 @@ $(document).ready(function () {
 
             // Getting drinks to recommend
             console.log(drinkArray);
-            let recArray = [];
+            const rec1 = document.getElementById('namerec1');
+            const rec2 = document.getElementById('namerec2');
+            const rec3 = document.getElementById('namerec3');
+            const rec4 = document.getElementById('namerec4');
             for (let i = 0; i < drinkArray.length; i++) {
-                let randomRecIndex = Math.floor(Math.random() * (drinkArray.length) + 1);
-                console.log(randomRecIndex);
-                if((drinkArray[randomRecIndex] != drinkName)  && (!recArray.includes(drinkArray[randomRecIndex]))){
-                    recArray.push(drinkArray[randomRecIndex]);
-                } 
+                if(drinkArray[i] != drinkName) {
+                    recArray.push(drinkArray[i]);
+
+                }
             }
+            for(var x = 0; x<recArray.length; x++){
+                getRecs(recArray[x],x);
+            }
+            //getRecs(recArray);
+            // Adding recommended drink names
+            //console.log(urlArray);
+            rec1.innerHTML = recArray[0];
+            rec2.innerHTML = recArray[1];
+            rec3.innerHTML = recArray[2];
+            rec4.innerHTML = recArray[3];
+            
+            console.log('1');
             console.log(recArray);
+
         });
     }
- 
+
+    function getRecs(drink,x) {
+        var queryURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drink;
+
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+            var imageURL = response.drinks[0].strDrinkThumb;
+
+            if(x===0){
+                var Img1 =  $("<img>").attr("src",  imageURL);
+                $("#img1").append(Img1);
+            }
+            else if(x===1){
+                var Img2 =  $("<img>").attr("src",  imageURL);
+                $("#img2").append(Img2);
+            }
+            else if(x===2){
+                var Img3 =  $("<img>").attr("src",  imageURL);
+                $("#img3").append(Img3);
+            }
+            else{
+                var Img4 =  $("<img>").attr("src",  imageURL);
+                $("#img4").append(Img4);
+            }
+
+        });
+    } 
 });

@@ -239,7 +239,7 @@ $(document).ready(function () {
         }).then(function (response) {
             console.log(response);
             var imageURL = response.drinks[0].strDrinkThumb;
-
+            //make them buttons
             if(x===0){
                 var Img1 =  $("<img>").attr("src",  imageURL);
                 $("#img1").append(Img1);

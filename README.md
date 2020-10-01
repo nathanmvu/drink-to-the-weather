@@ -79,13 +79,13 @@ I have never cared too much about windspeed but I desperately want to know what 
 
 Nathan Vu:
 
-* [linkedin] (https://www.linkedin.com/in/) 
+* [linkedin] (https://www.linkedin.com/in/nathan-vu/) 
 
-* [github] (https://github.com//)
+* [github] (https://github.com/nathanmvu)
 
  ## Credits
 
-I would like to thank Kerwin, Manuel, Roger, Jerome and all my classmates for helping me understand this subject matter and anyone that contributed to make the base code.
+We would like to thank Kerwin, Manuel, Roger, Jerome and all of our classmates for helping us understand this subject matter and anyone that contributed to make the base code.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

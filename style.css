@@ -118,15 +118,22 @@
 }
 
 
-
-
+.logo {
+  max-width: 25px;
+  max-height: 25px;
+}
+/* why are there two imgs?? */
 img {
   max-width: 380px;
   max-height: 350px;
   margin-bottom: 2%;
 }
 
-
+img {
+  max-width: 250px;
+  max-height: 250px;
+  margin-bottom: 2%;
+}
 /* css for left container/enter city form */
 
 .translucent-overlay {
@@ -160,17 +167,6 @@ img {
   color: #8a8a8a;
 }
 
-/* .translucent-form-overlay input::-webkit-input-placeholder {
-  color: #8a8a8a;
-}
-
-.translucent-form-overlay input:-ms-input-placeholder {
-  color: #8a8a8a;
-}
-
-.translucent-form-overlay input::placeholder {
-  color: #8a8a8a;
-} */
 
 /* For radio buttons */
 
@@ -222,14 +218,24 @@ img {
   }
 }
 
+/* For footer */
 
-img {
-  max-width: 250px;
-  max-height: 250px;
-  margin-bottom: 2%;
+
+.three-column-footer-contact-form-container {
+  background-color: #8a8a8a;
 }
 
+.three-column-footer-contact-form-container .three-column-footer-contact-form {
+  max-width: 75rem;
+  margin-right: auto;
+  margin-left: auto;
+  color: #e6e6e6;
+  padding: 3.75rem 0;
+}
+
+
 /* for bouncer */
+
 .error {
 	border-color: red;
 }

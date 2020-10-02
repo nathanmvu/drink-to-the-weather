@@ -1,4 +1,17 @@
 $(document).ready(function () {
+    //global arrays of drinks 
+    var coldDrinks = ["Irish Coffee", "Orange Scented Hot Chocolate", "Hot Creamy Bush","Rum Toddy","Melya",
+                        "Salted Toffee Martini","Sherry Eggnog"]; 
+    var midWeatherDrinks = ["Sidecar", "Dry Martini","Applecar","Apple Cider Punch #1", "Cranberry Punch",
+                            "Masala Chai","Mulled Wine","Spiced Peach Punch"]; 
+    var hotWeatherDrinks = ["Margarita", "Negroni", "Long Island Iced Tea", "Mojito", "Mai Tai",
+                            "Mint Julep", "Painkiller", "Tom Collins", "Pina Colada",
+                            "Manhattan", "Moscow Mule"]; 
+    let partyDrinks = ["Zombie", "Jello shots", "Jack's Vanilla Coke", "Downshift", "Long Island Iced Tea"];
+    let chillDrinks = ["Pina Colada", "White Wine Sangria", "Pineapple Paloma", "Planter's Punch", "Rum Punch"];
+    let problemDrinks = ["Shot-gun", "Zombie", "Radioactive Long Island Iced Tea", "The Evil Blue Thing", "Death in the Afternoon", "Quick F**K"];
+    let romanticDrinks = ["Sangria - The World's Best", "White Lady", "Wine Cooler", "Rose", "Vermouth Cassis"];
+
     // bouncer.js initialization step
     var bouncer = new Bouncer('[data-validate]', {
         disableSubmit: true,
@@ -78,7 +91,6 @@ $(document).ready(function () {
           }
     });
 
-
     //passed location through ajax function
     function locationWeather(location) {
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?&units=imperial&appid=48cb01e208735d9aa940904774b4bdab&q=" + location;
@@ -90,37 +102,28 @@ $(document).ready(function () {
             var weather = response.weather[0].main;
             var temp = response.main.temp;
             if (temp < 60) {
-                //cold weather drinks
-                var coldDrinks = ["Irish Coffee", "Orange Scented Hot Chocolate", "Hot Creamy Bush","Rum Toddy","Melya",
-                                  "Salted Toffee Martini","Sherry Eggnog"];               
+                //cold weather drinks          
                 getDrinks(coldDrinks);
                 console.log('cold');
             }
             else if (temp > 60 && temp < 75) {
-                //mid weather drinks
-                var midWeatherDrinks = ["Sidecar", "Dry Martini","Applecar","Apple Cider Punch #1", "Cranberry Punch",
-                                        "Masala Chai","Mulled Wine","Spiced Peach Punch"];               
+                //mid weather drinks             
                 getDrinks(midWeatherDrinks);
                 console.log('warm');
             }
             else {
                 //hot weather drinks
-                var hotWeatherDrinks = ["Margarita", "Negroni", "Long Island Iced Tea", "Mojito", "Mai Tai",
-                                        "Mint Julep", "Painkiller", "Tom Collins", "Pina Colada",
-                                        "Manhattan", "Moscow Mule"];
                 getDrinks(hotWeatherDrinks);
                 console.log('hot');
 
             }
+
+            // add if/else statement for bouncer.js here
         });
     }
 
-    function drinksByFeeling(mood) {
-        let partyDrinks = ["Zombie", "Jello shots", "Jack's Vanilla Coke", "Downshift", "Long Island Iced Tea"];
-        let chillDrinks = ["Pina Colada", "White Wine Sangria", "Pineapple Paloma", "Planter's Punch", "Rum Punch"];
-        let problemDrinks = ["Shot-gun", "Zombie", "Radioactive Long Island Iced Tea", "The Evil Blue Thing", "Death in the Afternoon", "Quick F**K"];
-        let romanticDrinks = ["Sangria - The World's Best", "White Lady", "Wine Cooler", "Rose", "Vermouth Cassis"];
-        
+    // Gets a feeling drink array to send to getDrinks
+    function drinksByFeeling(mood) { 
         if(mood == "party") {
             getDrinks(partyDrinks);
             getRecs(partyDrinks);
@@ -138,9 +141,13 @@ $(document).ready(function () {
 
 
     //drinks api
-    function getDrinks(drinkArray) {
-        var randomCocktailIndex = Math.floor(Math.random() * (drinkArray.length));
-        var queryURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drinkArray[randomCocktailIndex];
+    function getDrinks(drinkArray, drink) {
+        if(drink===undefined){
+            var randomCocktailIndex = Math.floor(Math.random() * (drinkArray.length));
+            drink = drinkArray[randomCocktailIndex];
+        }
+
+        var queryURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drink;
         $.ajax({
             url: queryURL,
             method: "GET"
@@ -150,9 +157,7 @@ $(document).ready(function () {
             var howToMake = response.drinks[0].strInstructions;
             const drinkName = response.drinks[0].strDrink;
             console.log(response.drinks[0].strDrink);
-            if(response.drinks.length > 1) {
-                console.log('larger than 1');
-            }
+            
             var cocktailInstructions = response.drinks[0].strInstructions;
             let ingredients = [];
             let measures = [];
@@ -168,33 +173,37 @@ $(document).ready(function () {
               
             // console.log(ingredients);
             // console.log(measures);
-            const drinkNameEl = document.createElement('h5');
-            console.log(drinkName);
-            drinkNameEl.innerHTML = drinkName;
+            // const drinkNameEl = document.createElement('h5');
+            // console.log(drinkName);
+            // drinkNameEl.innerHTML = drinkName;
 
         //for main img/title
             var drinkNameText = $("<h5>").text(drinkName);
-            $("#mainimgholder").append(drinkNameText);
+            $("#mainimgholder").empty().append(drinkNameText);
             var mainImg =  $("<img>").attr("src",  imageURL);
             $("#mainimgholder").append(mainImg);
             
-            $("#instructions").text(howToMake);
+            //$("#instructions").text(howToMake);
            
             //ingredients list section
-            var ListOverlay= $("<ul>").addClass("ingredients");
-            const ingredientsEl = document.getElementById("ingredients");
+            //var ListOverlay= $("<ul>").addClass("ingredients");
+            const ingredientsEl = document.getElementById('ingredients');
+            ingredientsEl.innerHTML = '';
+            let ingredientList = "";
             for(let i = 0; i < ingredients.length; i++) {
-                let ingredientItems = document.createElement("li");
+                //let ingredientItems = document.createElement("li");
                 //Checking to see if there is a measure for the ingredient
+
                 if(measures[i] != null) {
-                    ingredients[i] = measures[i] + " " + ingredients[i];
+                    ingredientList += "<li>" + measures[i] + " " + ingredients[i] + "</li>";
                 }
-                ingredientItems.innerHTML = ingredients[i];
-                console.log(ingredientItems);
-                ingredientsEl.append(ingredientItems);
+                //ingredientItems.innerHTML = ingredients[i];
+                //console.log(ingredientItems);
+                //ingredientsEl.append(ingredientItems);
             }
-            console.log(ingredients);
-            console.log(measures);
+            ingredientsEl.innerHTML = ingredientList;
+            //console.log(ingredients);
+            //console.log(measures);
             
             // Setting drink instructions
             const instructionsEl = document.getElementById("instructions");
@@ -210,12 +219,13 @@ $(document).ready(function () {
             for (let i = 0; i < drinkArray.length; i++) {
                 if(drinkArray[i] != drinkName) {
                     recArray.push(drinkArray[i]);
-
                 }
             }
+
             for(var x = 0; x<recArray.length; x++){
-                getRecs(recArray[x],x);
+                getRecs(recArray[x],x,drinkArray);
             }
+
             //getRecs(recArray);
             // Adding recommended drink names
             //console.log(urlArray);
@@ -223,38 +233,57 @@ $(document).ready(function () {
             rec2.innerHTML = recArray[1];
             rec3.innerHTML = recArray[2];
             rec4.innerHTML = recArray[3];
-            
-            console.log('1');
-            console.log(recArray);
+            recArray = [];
 
         });
     }
 
-    function getRecs(drink,x) {
+    function getRecs(drink,x, drinkArray) {
         var queryURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drink;
-
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
-            var imageURL = response.drinks[0].strDrinkThumb;
+            //console.log(response);
+            if(response.drinks != null) {
+                var imageURL = response.drinks[0].strDrinkThumb;
+            }
             //make them buttons
             if(x===0){
                 var Img1 =  $("<img>").attr("src",  imageURL);
-                $("#img1").append(Img1);
+                $("#img1").empty().append(Img1);
+                $("#img1").on("click", function(event) {
+                    event.preventDefault();
+                    $('#ingredients').empty();
+                    getDrinks(drinkArray, drink);
+                });
             }
             else if(x===1){
                 var Img2 =  $("<img>").attr("src",  imageURL);
-                $("#img2").append(Img2);
+                $("#img2").empty().append(Img2);
+                $("#img2").on("click", function() {
+                    $('#ingredients').empty();
+                    getDrinks(drinkArray, drink);
+                });
+
             }
             else if(x===2){
                 var Img3 =  $("<img>").attr("src",  imageURL);
-                $("#img3").append(Img3);
+                $("#img3").empty().append(Img3);
+                $("#img3").on("click", function() {
+                    $('#ingredients').empty();
+                    getDrinks(drinkArray, drink);
+                });
+
             }
             else if(x===3){
                 var Img4 =  $("<img>").attr("src",  imageURL);
-                $("#img4").append(Img4);
+                $("#img4").empty().append(Img4);
+                $("#img4").on("click", function() {
+                    $('#ingredients').empty();
+                    getDrinks(drinkArray, drink);
+                });
+
             }
             
         });

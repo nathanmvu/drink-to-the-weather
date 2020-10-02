@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
     //global arrays of drinks 
     var coldDrinks = ["Irish Coffee", "Orange Scented Hot Chocolate", "Hot Creamy Bush","Rum Toddy","Melya",
                         "Salted Toffee Martini","Sherry Eggnog"]; 
@@ -142,11 +143,13 @@ $(document).ready(function () {
 
     //drinks api
     function getDrinks(drinkArray, drink) {
+
+        // if there is no drink get random drink??? -R
         if(drink===undefined){
             var randomCocktailIndex = Math.floor(Math.random() * (drinkArray.length));
             drink = drinkArray[randomCocktailIndex];
         }
-
+        //pull the array
         var queryURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drink;
         $.ajax({
             url: queryURL,
@@ -159,6 +162,8 @@ $(document).ready(function () {
             console.log(response.drinks[0].strDrink);
             
             var cocktailInstructions = response.drinks[0].strInstructions;
+
+            //ingredients and messurements arrays
             let ingredients = [];
             let measures = [];
             // Gets all ingredients and ingredient measures
@@ -170,14 +175,8 @@ $(document).ready(function () {
                     measures.push(value);
                 }
             }
-              
-            // console.log(ingredients);
-            // console.log(measures);
-            // const drinkNameEl = document.createElement('h5');
-            // console.log(drinkName);
-            // drinkNameEl.innerHTML = drinkName;
 
-        //for main img/title
+            //for main img/title making h5 tag and main tag
             var drinkNameText = $("<h5>").text(drinkName);
             $("#mainimgholder").empty().append(drinkNameText);
             var mainImg =  $("<img>").attr("src",  imageURL);
@@ -186,20 +185,20 @@ $(document).ready(function () {
             //$("#instructions").text(howToMake);
            
             //ingredients list section
+
             //var ListOverlay= $("<ul>").addClass("ingredients");
             const ingredientsEl = document.getElementById('ingredients');
             ingredientsEl.innerHTML = '';
             let ingredientList = "";
             for(let i = 0; i < ingredients.length; i++) {
                 //let ingredientItems = document.createElement("li");
-                //Checking to see if there is a measure for the ingredient
+
+            //Checking to see if there is a measure for the ingredient
 
                 if(measures[i] != null) {
                     ingredientList += "<li>" + measures[i] + " " + ingredients[i] + "</li>";
                 }
-                //ingredientItems.innerHTML = ingredients[i];
-                //console.log(ingredientItems);
-                //ingredientsEl.append(ingredientItems);
+
             }
             ingredientsEl.innerHTML = ingredientList;
             //console.log(ingredients);
@@ -210,7 +209,7 @@ $(document).ready(function () {
             instructionsEl.innerHTML = howToMake;
 
             // Getting drinks to recommend
-            console.log(drinkArray);
+            //console.log(drinkArray);
             let recArray = [];
             const rec1 = document.getElementById('namerec1');
             const rec2 = document.getElementById('namerec2');

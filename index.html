@@ -24,7 +24,6 @@
                 </div>
                 <div class="article-details">
                   <div class="article-author">
-              
                     <a href="#">Jonathan Honda, Rachael Kelm-Southworth, Nathan Vu</a>
                   </div>
                   <!-- <div class="article-comments">
@@ -39,12 +38,12 @@
       
     </header>
       
-<div class="container">
+<div class="container" style="margin: 2%; max-height:82%">
 
   <!-- INPUT FORM -->
 
-    <div class="translucent-form-overlay small-2 large-4 columns" style="width: 98%; ">
-      <form>
+    <div class="translucent-form-overlay small-6 large-4 columns" style="width: 96%; max-height:96% ">
+      <form style="margin: 2%;">
         <h3>First, enter your city:</h3>
         <div class="row columns">
             <input id="locationInput"  for="textminmax" minlength="3" type="text" name="keyword" placeholder="City Name" required>
@@ -87,39 +86,32 @@
 
 <!-- End if Input form -->
 </div>
+
+
 <!-- OUTPUT FORMS -->
  
-
 <!-- Image and Title -->
-    <div  id="outputForm" class="translucent-form-overlay" style="width: 240%;">
+    <div  id="outputForm" class="translucent-form-overlay" style="width: 240%; max-height:96%">
       <div id="imgContainer" class="container2">
-        <div class="translucent-overlay" style="margin: 2%; ">
+        <div class="translucent-overlay">
 
           <h3>Then Drink Up!!</h3>
           </br>
           <div id = "mainimgholder"></div>
-          <!-- <h5 id="drinkName"></h5>
-            <div class="image">
-            <img src="Images/image.png">
-        drop image file here??-->
-      <!-- </div> -->
   
+    
     </div>  
 <!-- Ingredients list -->
      <div class="translucent-overlay" id="IngredientsList" style="margin: 2%;"> 
-
-    <!-- <div class="translucent-form-overlay" style="width: 100%;"> -->
         <h3>Ingredients</h3>
-
-          <ul id="ingredients" class="ingredients"></ul>
-      
+      </br>
+        <ul id="ingredients" class="ingredients"></ul>
     </div>
 <!-- Other -->
 
-        <div class="translucent-overlay" style="margin: 2%;"> 
-    
-    <!-- <div class="translucent-form-overlay" style="width: 100%; margin-right: 10%" > -->
+      <div class="translucent-overlay" style="margin: 2%;"> 
         <h3>Instructions</h3>
+      </br>
         <p id="instructions"></p>
         </br>
         <p id ="currentWeather"></p>
@@ -155,22 +147,22 @@
 
     <!-- Other Drink recommendations -->
 
-<div  id="otherRecs" class="translucent-form-overlay" style="width: 240%; margin-right: 10%; height: 100%" >
+<div class="translucent-form-overlay"  id="otherRecs" style="width: 240%; margin-right: 10%; height: 90%" >
   <h3>Other Recommendations</h3>
 <div class="container">
-  <div class="translucent-overlay" id="rec1" style="margin: 2%;">
+  <div class="translucent-overlay" id="rec1">
     <h5 id="namerec1"></h5>
     <button id = "img1"></button>
   </div>
-  <div class="translucent-overlay" id="rec2" style="margin: 2%;">
+  <div class="translucent-overlay" id="rec2">
     <h5 id="namerec2"></h5>
     <button id = "img2"></button>
   </div>
-  <div class="translucent-overlay" id="rec3" style="margin: 2%;">
+  <div class="translucent-overlay" id="rec3">
     <h5 id="namerec3"></h5>
     <button id = "img3"></button>
   </div>
-  <div class="translucent-overlay"  id="rec4" style="margin: 2%;">
+  <div class="translucent-overlay"  id="rec4">
     <h5 id="namerec4"></h5>
     <button id = "img4"></button>
   </div>

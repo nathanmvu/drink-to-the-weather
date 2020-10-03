@@ -12,7 +12,7 @@ $(document).ready(function () {
     let chillDrinks = ["Pina Colada", "White Wine Sangria", "Pineapple Paloma", "Planter's Punch", "Rum Punch"];
     let problemDrinks = ["Shot-gun", "Zombie", "Radioactive Long Island Iced Tea", "The Evil Blue Thing", "Death in the Afternoon", "Quick F**K"];
     let romanticDrinks = ["Sangria - The World's Best", "White Lady", "Wine Cooler", "Rose", "Vermouth Cassis"];
-
+    var d = "";
     // bouncer.js initialization step
     var bouncer = new Bouncer('[data-validate]', {
         disableSubmit: true,
@@ -60,27 +60,11 @@ $(document).ready(function () {
         event.preventDefault();
         var location = $("#locationInput").val();
         locationWeather(location);
-        //clears input box after clicked
-        $("#locationInput").val("");
-        $("#mainimgholder").empty();
-        $("#ingredients").empty();
-        $("#instructions").empty();
         $("#currentWeather").empty();
-        $("#img1").empty();
-        $("#img2").empty();
-        $("#img3").empty();
-        $("#img4").empty();
+        return;
     });
 
     $("#go").on("click", function (event) {
-        $("#mainimgholder").empty();
-        $("#ingredients").empty();
-        $("#instructions").empty();
-        $("#currentWeather").empty();
-        $("#img1").empty();
-        $("#img2").empty();
-        $("#img3").empty();
-        $("#img4").empty();
         let feeling = document.getElementsByName('feelings');
         for (let i = 0, length = feeling.length; i < length; i++) {
             if (feeling[i].checked) {
@@ -89,7 +73,9 @@ $(document).ready(function () {
               // only one radio can be logically checked, don't check the rest
               break;
             }
-          }
+        }
+        $("#currentWeather").empty();
+        return;
     });
 
     //passed location through ajax function
@@ -100,7 +86,7 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (response) {
             $("#currentWeather").html("Current Weather in "+response.name+ " " +response.main.temp +" "+ "&#176F");
-            var weather = response.weather[0].main;
+            //var weather = response.weather[0].main;
             var temp = response.main.temp;
             if (temp < 60) {
                 //cold weather drinks          
@@ -116,11 +102,12 @@ $(document).ready(function () {
                 //hot weather drinks
                 getDrinks(hotWeatherDrinks);
                 console.log('hot');
-
             }
+            return;
 
             // add if/else statement for bouncer.js here
         });
+        return;
     }
 
     // Gets a feeling drink array to send to getDrinks
@@ -138,12 +125,19 @@ $(document).ready(function () {
             getDrinks(romanticDrinks);
             getRecs(romanticDrinks);
         }
+        return;
     }
-
 
     //drinks api
     function getDrinks(drinkArray, drink) {
-
+        $("#locationInput").val("");
+        $("#mainimgholder").empty();
+        $("#ingredients").empty();
+        $("#instructions").empty();
+        $("#img1").empty();
+        $("#img2").empty();
+        $("#img3").empty();
+        $("#img4").empty();
         // if there is no drink get random drink??? -R
         if(drink===undefined){
             var randomCocktailIndex = Math.floor(Math.random() * (drinkArray.length));
@@ -157,84 +151,70 @@ $(document).ready(function () {
         }).then(function (response) {
             console.log(response);
             var imageURL = response.drinks[0].strDrinkThumb;
-            var howToMake = response.drinks[0].strInstructions;
-            const drinkName = response.drinks[0].strDrink;
-            console.log(response.drinks[0].strDrink);
-            
+            var drinkName = response.drinks[0].strDrink;
             var cocktailInstructions = response.drinks[0].strInstructions;
-
-            //ingredients and messurements arrays
-            let ingredients = [];
-            let measures = [];
-            // Gets all ingredients and ingredient measures
-            for (const [key, value] of Object.entries(response.drinks[0])) {
-                if((key.includes('strIngredient')) && (value != null)) {
-                    ingredients.push(value);
-                }
-                else if((key.includes('strMeasure')) && (value != null) && (value != undefined)) {
-                    measures.push(value);
-                }
-            }
-
-            //for main img/title making h5 tag and main tag
-            var drinkNameText = $("<h5>").text(drinkName);
-            $("#mainimgholder").empty().append(drinkNameText);
-            var mainImg =  $("<img>").attr("src",  imageURL);
-            $("#mainimgholder").append(mainImg);
-            
-            //$("#instructions").text(howToMake);
-           
-            //ingredients list section
-
-            //var ListOverlay= $("<ul>").addClass("ingredients");
-            const ingredientsEl = document.getElementById('ingredients');
-            ingredientsEl.innerHTML = '';
-            let ingredientList = "";
-            for(let i = 0; i < ingredients.length; i++) {
-                //let ingredientItems = document.createElement("li");
-
-            //Checking to see if there is a measure for the ingredient
-
-                if(measures[i] != null) {
-                    ingredientList += "<li>" + measures[i] + " " + ingredients[i] + "</li>";
-                }
-
-            }
-            ingredientsEl.innerHTML = ingredientList;
-            //console.log(ingredients);
-            //console.log(measures);
-            
-            // Setting drink instructions
-            const instructionsEl = document.getElementById("instructions");
-            instructionsEl.innerHTML = howToMake;
+            console.log(response.drinks[0].strDrink);
+            $("#mainName").text(drinkName);
+            $("#mainImg").attr("src", imageURL);
+            setIngredients(response);
+            $("#instructions").text(cocktailInstructions);
 
             // Getting drinks to recommend
-            //console.log(drinkArray);
-            let recArray = [];
-            const rec1 = document.getElementById('namerec1');
-            const rec2 = document.getElementById('namerec2');
-            const rec3 = document.getElementById('namerec3');
-            const rec4 = document.getElementById('namerec4');
-            for (let i = 0; i < drinkArray.length; i++) {
-                if(drinkArray[i] != drinkName) {
-                    recArray.push(drinkArray[i]);
-                }
-            }
-
-            for(var x = 0; x<recArray.length; x++){
-                getRecs(recArray[x],x,drinkArray);
-            }
-
-            //getRecs(recArray);
-            // Adding recommended drink names
-            //console.log(urlArray);
-            rec1.innerHTML = recArray[0];
-            rec2.innerHTML = recArray[1];
-            rec3.innerHTML = recArray[2];
-            rec4.innerHTML = recArray[3];
-            recArray = [];
-
+            setDrinkRecs(drinkArray,drinkName);
+            return;
         });
+        return;
+    }
+    function setIngredients(response){
+        //ingredients and messurements arrays
+        let ingredients = [];
+        let measures = [];
+        // Gets all ingredients and ingredient measures
+        for (const [key, value] of Object.entries(response.drinks[0])) {
+            if((key.includes('strIngredient')) && (value != null)) {
+                ingredients.push(value);
+            }
+            else if((key.includes('strMeasure')) && (value != null) && (value != undefined)) {
+                measures.push(value);
+            }
+        }  
+        //ingredients list section
+        const ingredientsEl = document.getElementById('ingredients');
+        ingredientsEl.innerHTML = '';
+        let ingredientList = "";
+        for(let i = 0; i < ingredients.length; i++) {
+        //Checking to see if there is a measure for the ingredient
+
+            if(measures[i] != null) {
+                ingredientList += "<li>" + measures[i] + " " + ingredients[i] + "</li>";
+            }
+        }
+        ingredientsEl.innerHTML = ingredientList;
+        return;
+    }
+
+    function setDrinkRecs(drinkArray,drinkName){
+        var recArray = [];
+        const rec1 = document.getElementById('namerec1');
+        const rec2 = document.getElementById('namerec2');
+        const rec3 = document.getElementById('namerec3');
+        const rec4 = document.getElementById('namerec4');
+        for (let i = 0; i < drinkArray.length; i++) {
+            if(drinkArray[i] != drinkName) {
+                recArray.push(drinkArray[i]);
+            }
+        }
+        for(var x = 0; x<4; x++){
+            getRecs(recArray[x],x,drinkArray);
+        }
+        rec1.innerHTML = recArray[0];
+        rec2.innerHTML = recArray[1];
+        rec3.innerHTML = recArray[2];
+        rec4.innerHTML = recArray[3];
+        recArray = [];
+        console.log(drinkArray);
+        d = drinkArray
+        return;
     }
 
     function getRecs(drink,x, drinkArray) {
@@ -246,45 +226,54 @@ $(document).ready(function () {
             //console.log(response);
             if(response.drinks != null) {
                 var imageURL = response.drinks[0].strDrinkThumb;
-            }
             //make them buttons
-            if(x===0){
-                var Img1 =  $("<img>").attr("src",  imageURL);
-                $("#img1").empty().append(Img1);
-                $("#img1").on("click", function(event) {
-                    event.preventDefault();
-                    $('#ingredients').empty();
-                    getDrinks(drinkArray, drink);
-                });
-            }
-            else if(x===1){
-                var Img2 =  $("<img>").attr("src",  imageURL);
-                $("#img2").empty().append(Img2);
-                $("#img2").on("click", function() {
-                    $('#ingredients').empty();
-                    getDrinks(drinkArray, drink);
-                });
-
-            }
-            else if(x===2){
-                var Img3 =  $("<img>").attr("src",  imageURL);
-                $("#img3").empty().append(Img3);
-                $("#img3").on("click", function() {
-                    $('#ingredients').empty();
-                    getDrinks(drinkArray, drink);
-                });
-
-            }
-            else if(x===3){
-                var Img4 =  $("<img>").attr("src",  imageURL);
-                $("#img4").empty().append(Img4);
-                $("#img4").on("click", function() {
-                    $('#ingredients').empty();
-                    getDrinks(drinkArray, drink);
-                });
-
-            }
-            
+                if(x===0){
+                    console.log(imageURL);
+                    $("#img1").attr("src",  imageURL);
+                    $("#img1").val(drink);
+                }
+                else if(x===1){
+                    $("#img2").attr("src",  imageURL);
+                    $("#img2").val(drink);
+                }
+                else if(x===2){
+                    $("#img3").attr("src",  imageURL);
+                    $("#img3").val(drink);
+                }
+                else if(x===3){
+                    $("#img4").attr("src",  imageURL);
+                    $("#img4").val(drink);
+                }
+            }  
+            return;  
         });
+        return;
     } 
+
+    $("#img1").on("click", function(event) {
+        event.preventDefault();
+        $('#ingredients').empty();
+        var drink = $("#img1").val();
+        getDrinks(d, drink);
+        $("#currentWeather").empty();
+    });
+    $("#img2").on("click", function() {
+        $('#ingredients').empty();
+        var drink = $("#img2").val();
+        getDrinks(d, drink);
+        $("#currentWeather").empty();
+    });
+    $("#img3").on("click", function() {
+        $('#ingredients').empty();
+        var drink = $("#img3").val();
+        getDrinks(d, drink);
+        $("#currentWeather").empty();
+    });
+    $("#img4").on("click", function() {
+        $('#ingredients').empty();
+        var drink = $("#img4").val();
+        getDrinks(d, drink);
+        $("#currentWeather").empty();
+    });
 });
+

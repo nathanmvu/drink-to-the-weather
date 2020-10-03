@@ -64,11 +64,11 @@ I have never cared too much about windspeed but I desperately want to know what 
 ### This is meant for either the seasoned cocktail drinker to get that bar experience at home or the newbie looking to expand their repetoir.
 
 ## Authors
- Jonathon Honda: 
+ Jonathan Honda: 
  
 * [linkedin] (https://www.linkedin.com/in/) 
 
-* [github] (https://github.com//) 
+* [github] (https://github.com/hondahelix) 
  
  
  Rachael Kelm-Southworth: 

@@ -44,7 +44,7 @@ Our input card functions much like a bartender would. It asks you how you feel, 
 
 We wanted to create a responsive tablet that gives you all the information you need for drinks as well as displaying some information on the weather if applicable. When the user inputs a city, the average weather temperature for the city will show up below the instructions section of the page.
  
-### __3. Other possible reccomendations area__
+### __3. Other possible recommendations area__
 
 Just like at a bar, you may decide the first drink you see doesn't sound to good. Don't like pineapple or have milk in your fridge to make the first drink? No problem, just like an experienced bartender, we got this. We have 4 more drinks you could make that will match your mood perfectly. 
 

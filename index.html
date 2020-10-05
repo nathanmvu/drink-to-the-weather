@@ -7,7 +7,15 @@
     <title>Drink To The Weather</title>
     <link rel="shortcut icon" href="/Images/logo2.jpg" type="image/x-icon">
     <link rel='stylesheet' href='style.css'>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/foundation.css" />
+    <!-- foundation-float.min.css: Compressed CSS with legacy Float Grid -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation-float.min.css" integrity="sha256-4ldVyEvC86/kae2IBWw+eJrTiwNEbUUTmN0zkP4luL4=" crossorigin="anonymous">
+
+<!-- foundation-prototype.min.css: Compressed CSS with prototyping classes -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation-prototype.min.css" integrity="sha256-BiKflOunI0SIxlTOOUCQ0HgwXrRrRwBkIYppEllPIok=" crossorigin="anonymous">
+
+<!-- foundation-rtl.min.css: Compressed CSS with right-to-left reading direction -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation-rtl.min.css" integrity="sha256-F+9Ns8Z/1ZISonBbojH743hsmF3x3AlQdJEeD8DhQsE=" crossorigin="anonymous">
     
     <!-- icon image -->
     <link rel="apple-touch-icon" sizes="180x180" href="./Images/Icons/apple-touch-icon.png">
@@ -23,18 +31,18 @@
     <header>
       
       <div class="row expanded collapse">
-        <div class="column">
+        <div class="column" style="margin: 2%;">
           <div class="large-article-header">
             <div class="large-article-header-content">
+              
               <div class="center-container">
-               
+          
                 <div class="article-title">
-                  <h1>Drink to the Weather</h1>
+                  <h1>  <img src="Images/logo2.jpg" class="logo" alt="Logo:Rain cloud over a glass" /> Drink to the Weather</h1>
                 </div>
                 <div class="article-details">
                   <div class="article-author">
-                    <!-- <img src="https://unsplash.it/50/50?image=1005" class="logo" alt="Logo:Rain cloud over a glass" /> -->
-                    <a href="#">Jonathan Honda, Rachael Kelm-Southworth, Nathan Vu would like to remind you to please drink responsibly</a>
+                    <a href="#">Jonathan Honda, Rachael Kelm-Southworth and Nathan Vu would like to remind you to please drink responsibly.</a>
                   </div>
                 </div>
               </div>
@@ -45,27 +53,25 @@
       
     </header>
       
-<div class="container" style="margin: 2%; max-height:82%">
-
-  <!-- INPUT FORM -->
-
-    <div class="translucent-form-overlay small-6 large-4 columns" style="width: 96%; max-height:96% ">
-      <form style="margin: 2%;">
-        <h3>First, enter your city:</h3>
-        <div class="row columns">
+<div class="grid-container" style="margin:2%">
+  <!-- TOP FORMS FORM -->
+  <div class="row grid-x grid-margin- small-up-1 medium-up-1 large-up-4">
+    <!-- INPUT FORM -->
+    <div class="column" >
+      <aside  id="inputForm" class="translucent-form-overlay">
+        <form style="min-width:200px; margin: 2%">
+           <h3>First, enter your city:</h3>
+           <div class="row columns">
             <input id="locationInput"  for="textminmax" minlength="3" autocomplete="off" type="text" name="keyword" placeholder="City Name" required>
-        </div>
-  
+          </div>
         <button id="searchButton" type="submit" value="Submit" class="button secondary expanded search-button ">
           Search
         </button>
-     </form>
-
+        </form>
      <!-- Radio Buttons -->
-    <div class="polls">
+       <div class="polls">
       <div class="polls-question">
-      </br>
-      <h4>Or, Tell us how you're feeling:</h4>
+      <h5>  Or, Tell us how you're feeling:</h5>
       
       </div>
       <div class="polls-options">
@@ -89,36 +95,41 @@
       <div class="polls-submit">
         <input id="go" type="submit" class="button secondary" value="Go">
       </div>
-    </div>
-
-<!-- End if Input form -->
-</div>
-
+       </div>
+       <!-- End if Input form -->
+      </aside>
+      <!-- end of input form column -->
+     </div>
 
 <!-- OUTPUT FORMS -->
  
-<!-- Image and Title -->
-    <div  id="outputForm" class="translucent-form-overlay" style="width: 240%; max-height:96%">
-      <div id="imgContainer" class="container2">
-        <div class="translucent-overlay">
 
+<div class="columns">
+    <div  id="outputForm" class="translucent-form-overlay "style=" margin: 2%; min-height:495px; min-width:80vw;">
+      <div id="imgContainer" class="container2 ">
+          <!-- Image and Title -->
+    <div class="row grid-1 grid-margin-2 small-up-1 medium-up-1 large-up-3">
+      <div class="column ">
+        <div class="translucent-overlay">
           <h3>Then Drink Up!!</h3>
           </br>
           <div id = "mainimgholder"></div>
           <h5 id = "mainName"></h5>
+        </br>
           <img id = "mainImg" src="" alt="">
-  
-    
-    </div>  
+        </div> 
+      </div>   
 <!-- Ingredients list -->
-     <div class="translucent-overlay" id="IngredientsList" style="margin: 2%;"> 
-        <h3>Ingredients</h3>
-      </br>
-        <ul id="ingredients" class="ingredients"></ul>
-    </div>
+    <div class="column">
+       <div class="translucent-overlay" > 
+         <h3>Ingredients</h3 id="IngredientsList">
+         </br>
+         <ul id="ingredients" class="ingredients"></ul>
+       </div>
+      </div>
 <!-- Other -->
-
-      <div class="translucent-overlay" style="margin: 2%;"> 
+    <div class="column">
+      <div class="translucent-overlay"> 
         <h3>Instructions</h3>
       </br>
         <p id="instructions"></p>
@@ -126,90 +137,67 @@
         <p id ="currentWeather"></p>
     </div>
   </div>
+  </div>
+  </div>
   <!-- End of Output-->
 </div>
 
-
+</div>
+<!-- end of row -->
+</div>
 
 
 <!-- Other Drink recommendations -->
-    <!-- blank rows -->
-
-    <div style="width: 100%; margin-right: 10%" ></div>
-
-
-    <div class="translucent-overlay" style="width: 100%;"></div>
-    
-
-    <!-- For  -->
-    <div class="translucent-overlay" style="width: 100%;"></div>
-
+<div class="row grid-x grid-margin- small-up-1 medium-up-4 large-up-4">
+  <div class="column">
+    <aside  id="inputForm" class="translucent-overlay" style="max-width:400%;min-width:200px;">
+     
+  </div>
+  <!-- <div class="column"></div> -->
     <!-- Other Drink recommendations -->
+  <div class="column">
+    <div class="translucent-form-overlay"  id="otherRecs" style="width: 80vw">
+       <h3>Other Recommendations</h3>
+         <div class="row small-up-1 medium-up-4 large-up-4">
 
-<div class="translucent-form-overlay"  id="otherRecs" style="width: 240%; margin-right: 10%; height: 90%" >
-  <h3>Other Recommendations</h3>
-<div class="container">
-  <div class="translucent-overlay" id="rec1" >
-    <h5 id="namerec1"></h5>
-    <img id = "img1"  src="" alt="cocktail">
-  </div>
-  <div class="translucent-overlay" id="rec2" >
-    <h5 id="namerec2"></h5>
-    <img id = "img2" src="" alt="cocktail">
-  </div>
-  <div class="translucent-overlay" id="rec3" >
-    <h5 id="namerec3"></h5>
-    <img id = "img3"  src="" alt="cocktail">
-  </div>
-  <div class="translucent-overlay"  id="rec4" >
-    <h5 id="namerec4"></h5>
-    <img id = "img4"  src="" alt="cocktail">
+           <div class="column">
+              <div class="translucent-overlay" id="rec1" >
+                 <h6 id="namerec1"></h6>
+                  </br>
+                   <img id = "img1"  src="" alt="">
+               </div>
+             </div>
+
+           <div class="column">
+             <div class="translucent-overlay" id="rec2" >
+               <h6 id="namerec2"></h6>
+              </br>
+               <img id = "img2" src="" alt="">
+             </div>
+            </div>
+
+           <div class="column">
+             <div class="translucent-overlay" id="rec3" >
+              <h6 id="namerec3"></h6>
+            </br>
+              <img id = "img3"  src="" alt="">
+             </div>
+           </div>
+
+          <div class="column">
+            <div class="translucent-overlay"  id="rec4" >
+             <h6 id="namerec4"></h6>
+            </br>
+             <img id = "img4"  src="" alt="">
+           </div>
+         </div>
+      </div>
+   </div>
   </div>
 </div>
-
-</div>
-
 
     <!-- end of container -->
-  </div>
-
-<!-- Footer -->
-
-<!-- <div class="translucent-overlaythree-column-footer-contact-form-container">
-  <footer class="three-column-footer-contact-form" data-equalizer data-equalize-by-row="true">
-    <div class="footer-left" data-equalizer-watch>
-      <div class="baseline">
-        <div class="contact-details">
-          <h6>Contact details</h6>
-        </div>
-        <div class="newsletter">
-          <div class="input-group">
-            <h6>Sign up for our newsletter</h6>
-          </div>
-          <a class="button expanded" href="#">Submit</a>
-        </div>
-      </div>
-     </div>
-    <div class="footer-center" data-equalizer-watch>
-      <div class="baseline">
-        <div class="newsletter">
-         
-        </div>
-      </div>
-    </div>
-    <div class="footer-right" data-equalizer-watch>
-      <div class="baseline">
-        </div>
-      </div>
-    </div>
-  </footer>
 </div>
-
- -->
-
-
-
-<!-- End of Footer -->
 
   <script src="https://cdn.jsdelivr.net/gh/cferdinandi/bouncer@1/dist/bouncer.polyfills.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

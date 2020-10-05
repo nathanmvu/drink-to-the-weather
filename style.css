@@ -97,36 +97,42 @@
 }
 
 /* for grid system */
-.container {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-rows: (2fr)[2];
-      grid-template-rows: repeat(2, 2fr);
-  -ms-grid-columns: (4fr)[4];
-      grid-template-columns: repeat(4, 4fr);
-  /* width: 100vw; */
-  /* height: 30vh;
-  margin: 2%; */
-  max-height: 30vh;
+
+.row {
+ max-width: 98%;
+ 
 }
+
+#inputForm {
+  max-width:500px; 
+  max-height:96%;
+  min-width:280px; 
+  margin: 2%;
+}
+
+
+/* for outputs */
+#outputForm {
+  margin: 2%;
+  min-height:495px; 
+  /* min-width:400%; */
+}
+
+
+
+
 
 @media screen and (max-width: 60em) {
   .container {
     -ms-grid-rows: (1fr)[4];
         grid-template-rows: repeat(4, 1fr);
   }
-}
+} 
 
-
+/* for media */
 .logo {
-  max-width: 25px;
-  max-height: 25px;
-}
-/* why are there two imgs?? */
-img {
-  max-width: 380px;
-  max-height: 350px;
-  margin-bottom: 2%;
+  max-width: 50px;
+  max-height: 50px;
 }
 
 img {
@@ -134,14 +140,13 @@ img {
   max-height: 250px;
   margin-bottom: 2%;
 }
-/* css for left container/enter city form */
+/* css FOR form */
 
 .translucent-overlay {
   /* max-width: 80%; */
   /* width: 100%; */
   padding: 4%;
-  color: #fefefe;
-  /* margin: 2%; */
+  color: #fef
 }
 
 
@@ -151,8 +156,8 @@ img {
     background-color: rgba(54, 54, 54, 0.8);
     padding: 4%;
     color: #fefefe;
-    /* margin: 2%;
-     */
+    /* margin: 2%; */
+
   }
   
 .translucent-form-overlay .columns.row {
@@ -196,43 +201,6 @@ img {
   margin-right: .5rem;
   text-transform: uppercase;
 }
-
-
-/* for outputs */
-
-.container2 {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-rows: (2fr)[2];
-      grid-template-rows: repeat(2, 2fr);
-  -ms-grid-columns: (3fr)[3];
-      grid-template-columns: repeat(3, 3fr);
-  /* width: 100vw; */
-  max-height: 30vh;
-}
-
-@media screen and (max-width: 60em) {
-  .container {
-    -ms-grid-rows: (1fr)[4];
-        grid-template-rows: repeat(4, 1fr);
-  }
-}
-
-/* For footer */
-
-
-.three-column-footer-contact-form-container {
-  background-color: #8a8a8a;
-}
-
-.three-column-footer-contact-form-container .three-column-footer-contact-form {
-  max-width: 75rem;
-  margin-right: auto;
-  margin-left: auto;
-  color: #e6e6e6;
-  padding: 3.75rem 0;
-}
-
 
 /* for bouncer */
 

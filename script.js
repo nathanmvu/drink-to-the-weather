@@ -18,7 +18,6 @@ $(document).ready(function () {
         disableSubmit: true,
         customValidations: {
             valueMismatch: function (field) {
-                console.log("bouncer working!");
                 // Look for a selector for a field to compare
                 // If there isn't one, return false (no error)
                 var selector = field.getAttribute('data-bouncer-match');
@@ -64,11 +63,11 @@ $(document).ready(function () {
         return;
     });
 
+    //go button clicked
     $("#go").on("click", function (event) {
         let feeling = document.getElementsByName('feelings');
         for (let i = 0, length = feeling.length; i < length; i++) {
             if (feeling[i].checked) {
-              console.log(feeling[i].value);
               drinksByFeeling(feeling[i].value);
               // only one radio can be logically checked, don't check the rest
               break;
@@ -91,17 +90,14 @@ $(document).ready(function () {
             if (temp < 60) {
                 //cold weather drinks          
                 getDrinks(coldDrinks);
-                console.log('cold');
             }
             else if (temp > 60 && temp < 75) {
                 //mid weather drinks             
                 getDrinks(midWeatherDrinks);
-                console.log('warm');
             }
             else {
                 //hot weather drinks
                 getDrinks(hotWeatherDrinks);
-                console.log('hot');
             }
             return;
 
@@ -149,11 +145,9 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
             var imageURL = response.drinks[0].strDrinkThumb;
             var drinkName = response.drinks[0].strDrink;
             var cocktailInstructions = response.drinks[0].strInstructions;
-            console.log(response.drinks[0].strDrink);
             $("#mainName").text(drinkName);
             $("#mainImg").attr("src", imageURL);
             setIngredients(response);
@@ -193,6 +187,7 @@ $(document).ready(function () {
         return;
     }
 
+    // Sets drink recommendations
     function setDrinkRecs(drinkArray,drinkName){
         var recArray = [];
         const rec1 = document.getElementById('namerec1');
@@ -212,36 +207,38 @@ $(document).ready(function () {
         rec3.innerHTML = recArray[2];
         rec4.innerHTML = recArray[3];
         recArray = [];
-        console.log(drinkArray);
         d = drinkArray
         return;
     }
-
+    
+    // Getting drink recommendations
     function getRecs(drink,x, drinkArray) {
         var queryURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drink;
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            //console.log(response);
             if(response.drinks != null) {
                 var imageURL = response.drinks[0].strDrinkThumb;
-            //make them buttons
+                //make them buttons
                 if(x===0){
-                    console.log(imageURL);
                     $("#img1").attr("src",  imageURL);
+                    $("#img1").attr("alt", drink);
                     $("#img1").val(drink);
                 }
                 else if(x===1){
                     $("#img2").attr("src",  imageURL);
+                    $("#img2").attr("alt", drink);
                     $("#img2").val(drink);
                 }
                 else if(x===2){
                     $("#img3").attr("src",  imageURL);
+                    $("#img3").attr("alt", drink);
                     $("#img3").val(drink);
                 }
                 else if(x===3){
                     $("#img4").attr("src",  imageURL);
+                    $("#img4").attr("alt", drink);
                     $("#img4").val(drink);
                 }
             }  
